@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
 import axios from 'axios';
 
 import Nav from 'Nav';
@@ -10,14 +9,11 @@ class Main extends Component {
     super(props);
 
     this.state = {
-      articles: [{id: 0, title: "Loading...", text: "Loading..."}],
-      selectedArticle: null
+      articles: [{id: 0, title: "Loading...", text: "Loading...", date: "Loading..."}],
     };
-
-    this.getArticles();
   }
 
-  getArticles() {
+  componentDidMount() {
     axios.get('http://localhost:8000/articles.json').then(res => {
         this.setState({
           articles: res.data

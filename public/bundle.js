@@ -60,6 +60,10 @@
 
 	var _Main2 = _interopRequireDefault(_Main);
 
+	var _Article = __webpack_require__(252);
+
+	var _Article2 = _interopRequireDefault(_Article);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Test = function Test() {
@@ -77,7 +81,8 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/test', component: Test })
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/test', component: Test }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default })
 	  )
 	), document.getElementById("app"));
 
@@ -25334,10 +25339,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(36);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
 	var _axios = __webpack_require__(223);
 
 	var _axios2 = _interopRequireDefault(_axios);
@@ -25367,17 +25368,14 @@
 	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 	    _this.state = {
-	      articles: [{ id: 0, title: "Loading...", text: "Loading..." }],
-	      selectedArticle: null
+	      articles: [{ id: 0, title: "Loading...", text: "Loading...", date: "Loading..." }]
 	    };
-
-	    _this.getArticles();
 	    return _this;
 	  }
 
 	  _createClass(Main, [{
-	    key: 'getArticles',
-	    value: function getArticles() {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
 	      var _this2 = this;
 
 	      _axios2.default.get('http://localhost:8000/articles.json').then(function (res) {
@@ -26957,7 +26955,7 @@
 	    _react2.default.createElement(
 	      'h1',
 	      null,
-	      'Best page ever'
+	      'Best website ever ;)'
 	    )
 	  );
 	};
@@ -27007,7 +27005,7 @@
 /* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -27017,10 +27015,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouterDom = __webpack_require__(182);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var ListElement = function ListElement(props) {
-	  var title = props.title,
+	  var id = props.id,
+	      title = props.title,
 	      text = props.text,
 	      author = props.author,
 	      date = props.date;
@@ -27029,29 +27030,137 @@
 	  var shortText = text.substring(0, 121) + "...";
 
 	  return _react2.default.createElement(
-	    "li",
+	    'li',
 	    null,
 	    _react2.default.createElement(
-	      "h3",
+	      'h3',
 	      null,
 	      title
 	    ),
 	    _react2.default.createElement(
-	      "p",
+	      'p',
 	      null,
 	      shortText
 	    ),
 	    _react2.default.createElement(
-	      "span",
+	      'p',
 	      null,
 	      author,
-	      ", ",
-	      date
+	      ', ',
+	      date.substring(0, 10)
+	    ),
+	    _react2.default.createElement(
+	      _reactRouterDom.Link,
+	      { to: '/articles/' + id },
+	      'Read more >>'
 	    )
 	  );
 	};
 
 	exports.default = ListElement;
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouterDom = __webpack_require__(182);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Article = function (_Component) {
+	  _inherits(Article, _Component);
+
+	  function Article(props) {
+	    _classCallCheck(this, Article);
+
+	    var _this = _possibleConstructorReturn(this, (Article.__proto__ || Object.getPrototypeOf(Article)).call(this, props));
+
+	    _this.state = {
+	      article: { id: 0, title: "Loading...", text: "Loading...", date: "Loading..." }
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Article, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var id = this.props.match.params.id;
+
+
+	      var URL = 'http://localhost:8000/articles/' + id + '.json';
+
+	      _axios2.default.get(URL).then(function (res) {
+	        _this2.setState({
+	          article: res.data
+	        });
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'article',
+	          null,
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            this.state.article.title
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            this.state.article.text
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            this.state.article.author,
+	            ', ',
+	            this.state.article.date
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Article;
+	}(_react.Component);
+
+	exports.default = Article;
 
 /***/ })
 /******/ ]);
