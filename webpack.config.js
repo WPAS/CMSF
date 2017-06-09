@@ -12,6 +12,7 @@ module.exports = {
       ArticlesList: 'app/components/ArticlesList.jsx',
       ListElement: 'app/components/ListElement.jsx',
       Article: 'app/components/Article.jsx',
+      NewArticle: 'app/components/NewArticle.jsx',
     },
     extensions: ['', '.js', '.jsx'],
   },

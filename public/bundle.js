@@ -64,6 +64,10 @@
 
 	var _Article2 = _interopRequireDefault(_Article);
 
+	var _NewArticle = __webpack_require__(253);
+
+	var _NewArticle2 = _interopRequireDefault(_NewArticle);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Test = function Test() {
@@ -82,7 +86,8 @@
 	    null,
 	    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/test', component: Test }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default })
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default })
 	  )
 	), document.getElementById("app"));
 
@@ -25368,7 +25373,7 @@
 	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
 	    _this.state = {
-	      articles: [{ id: 0, title: "Loading...", text: "Loading...", date: "Loading..." }]
+	      articles: []
 	    };
 	    return _this;
 	  }
@@ -26946,6 +26951,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouterDom = __webpack_require__(182);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Nav = function Nav() {
@@ -26956,6 +26963,11 @@
 	      'h1',
 	      null,
 	      'Best website ever ;)'
+	    ),
+	    _react2.default.createElement(
+	      _reactRouterDom.Link,
+	      { to: '/' },
+	      'Main page'
 	    )
 	  );
 	};
@@ -27101,9 +27113,7 @@
 
 	    var _this = _possibleConstructorReturn(this, (Article.__proto__ || Object.getPrototypeOf(Article)).call(this, props));
 
-	    _this.state = {
-	      article: { id: 0, title: "Loading...", text: "Loading...", date: "Loading..." }
-	    };
+	    _this.state = { article: "" };
 	    return _this;
 	  }
 
@@ -27161,6 +27171,107 @@
 	}(_react.Component);
 
 	exports.default = Article;
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewArticle = function (_Component) {
+	  _inherits(NewArticle, _Component);
+
+	  function NewArticle() {
+	    _classCallCheck(this, NewArticle);
+
+	    return _possibleConstructorReturn(this, (NewArticle.__proto__ || Object.getPrototypeOf(NewArticle)).apply(this, arguments));
+	  }
+
+	  _createClass(NewArticle, [{
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      var title = this.refs.title.value;
+	      var text = this.refs.text.value;
+	      var author = this.refs.author.value;
+	      var date = this.refs.date.value;
+	      console.log(title, text, author, date);
+
+	      if (title.length > 0 && text.length > 0 && author.length > 0) {
+	        _axios2.default.post('http://localhost:8000/articles.json', { title: title, text: text, author: author, date: date }).then(function (res) {
+	          return console.log(res);
+	        }).catch(function (error) {
+	          return console.log(error);
+	        });
+	      } else {
+	        this.refs.title.focus();
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var now = new Date();
+
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Admin area'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit.bind(this) },
+	          _react2.default.createElement('input', { type: 'text', ref: 'title', placeholder: 'Add a title' }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text', placeholder: 'Write new article' }),
+	          _react2.default.createElement('input', { type: 'text', ref: 'author', placeholder: 'Add author\'s name' }),
+	          _react2.default.createElement('input', { type: 'hidden', ref: 'date', value: now }),
+	          _react2.default.createElement(
+	            'button',
+	            null,
+	            'Add Article'
+	          )
+	        )
+	      );
+	    }
+
+	    //ref={input => {this.name = input;}}
+
+	  }]);
+
+	  return NewArticle;
+	}(_react.Component);
+
+	exports.default = NewArticle;
 
 /***/ })
 /******/ ]);

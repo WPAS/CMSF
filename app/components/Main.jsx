@@ -9,7 +9,7 @@ class Main extends Component {
     super(props);
 
     this.state = {
-      articles: [{id: 0, title: "Loading...", text: "Loading...", date: "Loading..."}],
+      articles: [],
     };
   }
 

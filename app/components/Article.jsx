@@ -8,9 +8,7 @@ class Article extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      article: {id: 0, title: "Loading...", text: "Loading...", date: "Loading..."}
-    };
+    this.state = { article: "" };
   }
 
   componentDidMount() {
