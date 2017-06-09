@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ListElement = props => {
-  const { id, title, text, author, date } = props
+  const { id, title, text, author, date } = props;
 
   const shortText = text.substring(0,121) + "...";
 

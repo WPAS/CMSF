@@ -14,7 +14,7 @@ class Article extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
 
-    const URL = `http://localhost:8000/articles/${id}.json`
+    const URL = `http://localhost:8000/articles/${id}`
 
     axios.get(URL).then(res => {
         this.setState({
@@ -26,13 +26,15 @@ class Article extends Component {
   }
 
   render() {
+    const { title, text, author, date } = this.state.article;
+
     return(
       <main>
         <Nav />
         <article>
-          <h3>{this.state.article.title}</h3>
-          <p>{this.state.article.text}</p>
-          <span>{this.state.article.author}, {this.state.article.date}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+          <span>{author}, {date}</span>
         </article>
       </main>
     )

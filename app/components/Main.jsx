@@ -14,7 +14,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8000/articles.json').then(res => {
+    axios.get('http://localhost:8000/articles').then(res => {
         this.setState({
           articles: res.data
         });

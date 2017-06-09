@@ -70,14 +70,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Test = function Test() {
-	  return _react2.default.createElement(
-	    'p',
-	    null,
-	    'wreszcie kurna co\u015B tu dzia\u0142a!!!'
-	  );
-	};
-
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouterDom.HashRouter,
 	  null,
@@ -85,7 +77,6 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/test', component: Test }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default })
 	  )
@@ -25383,7 +25374,7 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
-	      _axios2.default.get('http://localhost:8000/articles.json').then(function (res) {
+	      _axios2.default.get('http://localhost:8000/articles').then(function (res) {
 	        _this2.setState({
 	          articles: res.data
 	        });
@@ -27125,7 +27116,7 @@
 	      var id = this.props.match.params.id;
 
 
-	      var URL = 'http://localhost:8000/articles/' + id + '.json';
+	      var URL = 'http://localhost:8000/articles/' + id;
 
 	      _axios2.default.get(URL).then(function (res) {
 	        _this2.setState({
@@ -27138,6 +27129,13 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _state$article = this.state.article,
+	          title = _state$article.title,
+	          text = _state$article.text,
+	          author = _state$article.author,
+	          date = _state$article.date;
+
+
 	      return _react2.default.createElement(
 	        'main',
 	        null,
@@ -27148,19 +27146,19 @@
 	          _react2.default.createElement(
 	            'h3',
 	            null,
-	            this.state.article.title
+	            title
 	          ),
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            this.state.article.text
+	            text
 	          ),
 	          _react2.default.createElement(
 	            'span',
 	            null,
-	            this.state.article.author,
+	            author,
 	            ', ',
-	            this.state.article.date
+	            date
 	          )
 	        )
 	      );
@@ -27221,13 +27219,13 @@
 	      var text = this.refs.text.value;
 	      var author = this.refs.author.value;
 	      var date = this.refs.date.value;
-	      console.log(title, text, author, date);
+	      console.log({ title: title, text: text, author: author, date: date });
 
 	      if (title.length > 0 && text.length > 0 && author.length > 0) {
-	        _axios2.default.post('http://localhost:8000/articles.json', { title: title, text: text, author: author, date: date }).then(function (res) {
-	          return console.log(res);
+	        _axios2.default.post('http://localhost:8000/articles', { title: title, text: text, author: author, date: date }).then(function (res) {
+	          console.log(res);
 	        }).catch(function (error) {
-	          return console.log(error);
+	          console.log(error);
 	        });
 	      } else {
 	        this.refs.title.focus();

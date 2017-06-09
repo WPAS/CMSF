@@ -11,12 +11,12 @@ class NewArticle extends Component {
     const text = this.refs.text.value;
     const author = this.refs.author.value;
     const date = this.refs.date.value;
-    console.log(title, text, author, date);
+    console.log({ title, text, author, date });
 
     if(title.length > 0 && text.length > 0 && author.length > 0) {
-      axios.post('http://localhost:8000/articles.json', { title, text, author, date })
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+      axios.post('http://localhost:8000/articles', { title, text, author, date })
+      .then(res => { console.log(res) })
+      .catch(error => { console.log(error) });
     } else {
       this.refs.title.focus();
     }
