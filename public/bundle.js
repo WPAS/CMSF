@@ -68,6 +68,14 @@
 
 	var _NewArticle2 = _interopRequireDefault(_NewArticle);
 
+	var _MainAdmin = __webpack_require__(254);
+
+	var _MainAdmin2 = _interopRequireDefault(_MainAdmin);
+
+	var _EditArticle = __webpack_require__(257);
+
+	var _EditArticle2 = _interopRequireDefault(_EditArticle);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -78,7 +86,9 @@
 	    null,
 	    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default })
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _MainAdmin2.default }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/edit/:id', component: _EditArticle2.default })
 	  )
 	), document.getElementById("app"));
 
@@ -27190,6 +27200,8 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _reactRouterDom = __webpack_require__(182);
+
 	var _Nav = __webpack_require__(249);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
@@ -27214,15 +27226,18 @@
 	  _createClass(NewArticle, [{
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
+	      var _this2 = this;
+
 	      e.preventDefault();
 	      var title = this.refs.title.value;
 	      var text = this.refs.text.value;
 	      var author = this.refs.author.value;
 	      var date = this.refs.date.value;
-	      console.log({ title: title, text: text, author: author, date: date });
+	      //console.log({ title, text, author, date });
 
 	      if (title.length > 0 && text.length > 0 && author.length > 0) {
 	        _axios2.default.post('http://localhost:8000/articles', { title: title, text: text, author: author, date: date }).then(function (res) {
+	          _this2.props.history.push("/admin");
 	          console.log(res);
 	        }).catch(function (error) {
 	          console.log(error);
@@ -27251,6 +27266,7 @@
 	          _react2.default.createElement('input', { type: 'text', ref: 'title', placeholder: 'Add a title' }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text', placeholder: 'Write new article' }),
+	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('input', { type: 'text', ref: 'author', placeholder: 'Add author\'s name' }),
 	          _react2.default.createElement('input', { type: 'hidden', ref: 'date', value: now }),
 	          _react2.default.createElement(
@@ -27261,8 +27277,8 @@
 	        )
 	      );
 	    }
-
 	    //ref={input => {this.name = input;}}
+	    //        this.context.router.push('/admin')
 
 	  }]);
 
@@ -27270,6 +27286,361 @@
 	}(_react.Component);
 
 	exports.default = NewArticle;
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _ArticlesListAdmin = __webpack_require__(255);
+
+	var _ArticlesListAdmin2 = _interopRequireDefault(_ArticlesListAdmin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MainAdmin = function (_Component) {
+	  _inherits(MainAdmin, _Component);
+
+	  function MainAdmin(props) {
+	    _classCallCheck(this, MainAdmin);
+
+	    var _this = _possibleConstructorReturn(this, (MainAdmin.__proto__ || Object.getPrototypeOf(MainAdmin)).call(this, props));
+
+	    _this.state = {
+	      articles: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(MainAdmin, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      _axios2.default.get('http://localhost:8000/articles').then(function (res) {
+	        _this2.setState({
+	          articles: res.data
+	        });
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Admin area'
+	        ),
+	        _react2.default.createElement(_ArticlesListAdmin2.default, { articles: this.state.articles })
+	      );
+	    }
+	  }]);
+
+	  return MainAdmin;
+	}(_react.Component);
+
+	exports.default = MainAdmin;
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ListElementAdmin = __webpack_require__(256);
+
+	var _ListElementAdmin2 = _interopRequireDefault(_ListElementAdmin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ArticlesListAdmin = function ArticlesListAdmin(props) {
+	  var articles = props.articles;
+
+
+	  var List = articles.map(function (article) {
+	    return _react2.default.createElement(_ListElementAdmin2.default, _extends({ key: article.id }, article));
+	  });
+
+	  return _react2.default.createElement(
+	    "ul",
+	    null,
+	    List
+	  );
+	};
+
+	exports.default = ArticlesListAdmin;
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouterDom = __webpack_require__(182);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ListElementAdmin = function ListElementAdmin(props) {
+	  var id = props.id,
+	      title = props.title,
+	      text = props.text,
+	      author = props.author,
+	      date = props.date,
+	      onDelete = props.onDelete;
+
+
+	  var shortText = text.substring(0, 121) + "...";
+
+	  var onButtonClick = function onButtonClick() {
+	    _axios2.default.delete('http://localhost:8000/articles/' + id).then(function (res) {
+	      console.log(res);
+	    }).catch(function (error) {
+	      console.log(error);
+	    });
+	  };
+
+	  return _react2.default.createElement(
+	    'li',
+	    null,
+	    _react2.default.createElement(
+	      'h3',
+	      null,
+	      title
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      shortText
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      author,
+	      ', ',
+	      date.substring(0, 10)
+	    ),
+	    _react2.default.createElement(
+	      _reactRouterDom.Link,
+	      { to: '/edit/' + id },
+	      'Edit'
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      { onClick: onButtonClick },
+	      'Delete'
+	    )
+	  );
+	};
+
+	exports.default = ListElementAdmin;
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EditArticle = function (_Component) {
+	  _inherits(EditArticle, _Component);
+
+	  function EditArticle(props) {
+	    _classCallCheck(this, EditArticle);
+
+	    var _this = _possibleConstructorReturn(this, (EditArticle.__proto__ || Object.getPrototypeOf(EditArticle)).call(this, props));
+
+	    _this.state = { article: "" };
+	    return _this;
+	  }
+
+	  _createClass(EditArticle, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var id = this.props.match.params.id;
+
+
+	      var URL = 'http://localhost:8000/articles/' + id;
+
+	      _axios2.default.get(URL).then(function (res) {
+	        _this2.setState({
+	          article: res.data
+	        });
+	        _this2.refs.title.focus();
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'handleFocus',
+	    value: function handleFocus(e) {
+	      var _state$article = this.state.article,
+	          title = _state$article.title,
+	          text = _state$article.text,
+	          author = _state$article.author;
+
+	      this.refs.title.value = title;
+	      this.refs.text.value = text;
+	      this.refs.author.value = author;
+	    }
+	  }, {
+	    key: 'handleBlur',
+	    value: function handleBlur(e) {
+	      var title = this.refs.title.value;
+	      var text = this.refs.text.value;
+	      var author = this.refs.author.value;
+	      var _state$article2 = this.state.article,
+	          id = _state$article2.id,
+	          date = _state$article2.date;
+
+	      this.setState({
+	        article: { id: id, title: title, text: text, author: author, date: date }
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      var _this3 = this;
+
+	      e.preventDefault;
+	      var title = this.refs.title.value;
+	      var text = this.refs.text.value;
+	      var author = this.refs.author.value;
+	      var id = this.state.article.id;
+	      console.log({ id: id, title: title, text: text, author: author });
+
+	      var URL = 'http://localhost:8000/articles/' + id;
+
+	      _axios2.default.put(URL, { title: title, text: text, author: author }).then(function (res) {
+	        _this3.props.history.push("/admin");
+	        console.log(res);
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _state$article3 = this.state.article,
+	          title = _state$article3.title,
+	          text = _state$article3.text,
+	          author = _state$article3.author,
+	          date = _state$article3.date;
+
+
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Admin area'
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { onFocus: this.handleFocus.bind(this),
+	            onSubmit: this.handleSubmit.bind(this),
+	            onBlur: this.handleBlur.bind(this)
+	          },
+	          _react2.default.createElement('input', { type: 'text', ref: 'title' }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text' }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('input', { type: 'text', ref: 'author' }),
+	          _react2.default.createElement(
+	            'button',
+	            null,
+	            'Save edits'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return EditArticle;
+	}(_react.Component);
+
+	exports.default = EditArticle;
 
 /***/ })
 /******/ ]);
