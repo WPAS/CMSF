@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const ListElementAdmin = function(props) {
+const ListElementPage = function(props) {
 
-  const { id, title, text, author, date, onDelete } = props;
+  const { id, title, text, date } = props;
 
   const shortText = text.substring(0,200) + "...";
 
@@ -13,9 +13,9 @@ const ListElementAdmin = function(props) {
       <div className="small-8 small-offset-2 columns">
         <h3>{title}</h3>
         <p>{shortText}</p>
-        <p>{author}, {date.substring(0,10)}</p>
-        <Link to={`/edit/${id}`} className="button success">
-          Edit/Remove article
+        <p>{date.substring(0,10)}</p>
+        <Link to={`/editPage/${id}`} className="button">
+          Edit/Remove page
         </Link>
         <hr />
       </div>
@@ -23,4 +23,4 @@ const ListElementAdmin = function(props) {
   );
 }
 
-export default ListElementAdmin;
+export default ListElementPage;

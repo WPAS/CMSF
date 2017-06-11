@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import Nav from 'Nav';
+import Footer from 'Footer';
 
 class Article extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class Article extends Component {
     const { title, text, author, date } = this.state.article;
 
     return(
-      <main >
+      <div >
         <Nav />
         <article className="row">
           <div className="small-8 small-offset-2 columns">
@@ -38,7 +39,8 @@ class Article extends Component {
             <p className="text-right">{author}, {date}</p>
           </div>
         </article>
-      </main>
+        <Footer />
+      </div>
     )
   }
 }

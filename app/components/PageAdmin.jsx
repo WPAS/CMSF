@@ -3,21 +3,21 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import Nav from 'Nav';
-import ArticlesListAdmin from 'ArticlesListAdmin';
+import PagesListAdmin from 'PagesListAdmin';
 
-class MainAdmin extends Component {
+class PageAdmin extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      articles: [],
+      pages: [],
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8000/articles').then(res => {
+    axios.get('http://localhost:8000/pages').then(res => {
         this.setState({
-          articles: res.data
+          pages: res.data
         });
       }).catch(error => {
         console.log(error)
@@ -31,15 +31,14 @@ class MainAdmin extends Component {
         <div className="row">
           <div className="small-8 small-offset-2 columns">
           <h3>Admin area</h3>
-          <Link to="/newArticle" className="button success">ADD NEW ARTICLE</Link>
-          <Link to="/editPages" className="button">EDIT PAGES</Link>
+          <Link to="/newPage" className="button expanded success">ADD NEW PAGE</Link>
           <hr />
           </div>
         </div>
-        <ArticlesListAdmin articles={this.state.articles} />
+        <PagesListAdmin pages={this.state.pages} />
       </main>
     )
   }
 }
 
-export default MainAdmin;
+export default PageAdmin;

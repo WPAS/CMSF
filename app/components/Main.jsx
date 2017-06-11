@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Nav from 'Nav';
+import Footer from 'Footer';
 import ArticlesList from 'ArticlesList';
 
 class Main extends Component {
@@ -28,6 +29,7 @@ class Main extends Component {
       <main>
         <Nav />
         <ArticlesList articles={this.state.articles} />
+        <Footer />
       </main>
     )
   }

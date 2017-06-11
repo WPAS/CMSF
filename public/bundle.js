@@ -60,25 +60,37 @@
 
 	var _Main2 = _interopRequireDefault(_Main);
 
-	var _Article = __webpack_require__(252);
+	var _Article = __webpack_require__(253);
 
 	var _Article2 = _interopRequireDefault(_Article);
 
-	var _NewArticle = __webpack_require__(253);
+	var _NewArticle = __webpack_require__(254);
 
 	var _NewArticle2 = _interopRequireDefault(_NewArticle);
 
-	var _MainAdmin = __webpack_require__(254);
+	var _MainAdmin = __webpack_require__(255);
 
 	var _MainAdmin2 = _interopRequireDefault(_MainAdmin);
 
-	var _EditArticle = __webpack_require__(257);
+	var _EditArticle = __webpack_require__(258);
 
 	var _EditArticle2 = _interopRequireDefault(_EditArticle);
 
-	var _Page = __webpack_require__(258);
+	var _Page = __webpack_require__(259);
 
 	var _Page2 = _interopRequireDefault(_Page);
+
+	var _PageAdmin = __webpack_require__(260);
+
+	var _PageAdmin2 = _interopRequireDefault(_PageAdmin);
+
+	var _NewPage = __webpack_require__(263);
+
+	var _NewPage2 = _interopRequireDefault(_NewPage);
+
+	var _EditPage = __webpack_require__(264);
+
+	var _EditPage2 = _interopRequireDefault(_EditPage);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -93,7 +105,10 @@
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _MainAdmin2.default }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/edit/:id', component: _EditArticle2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/page/:id', component: _Page2.default })
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/page/:id', component: _Page2.default }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/editPages', component: _PageAdmin2.default }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newPage', component: _NewPage2.default }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/editPage/:id', component: _EditPage2.default })
 	  )
 	), document.getElementById("app"));
 
@@ -25358,7 +25373,11 @@
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
-	var _ArticlesList = __webpack_require__(250);
+	var _Footer = __webpack_require__(250);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
+
+	var _ArticlesList = __webpack_require__(251);
 
 	var _ArticlesList2 = _interopRequireDefault(_ArticlesList);
 
@@ -25404,7 +25423,8 @@
 	        'main',
 	        null,
 	        _react2.default.createElement(_Nav2.default, null),
-	        _react2.default.createElement(_ArticlesList2.default, { articles: this.state.articles })
+	        _react2.default.createElement(_ArticlesList2.default, { articles: this.state.articles }),
+	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
 	  }]);
@@ -26993,6 +27013,102 @@
 /* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouterDom = __webpack_require__(182);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Footer = function (_Component) {
+	  _inherits(Footer, _Component);
+
+	  function Footer(props) {
+	    _classCallCheck(this, Footer);
+
+	    var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this, props));
+
+	    _this.state = {
+	      pages: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Footer, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      _axios2.default.get('http://localhost:8000/pages').then(function (res) {
+	        _this2.setState({
+	          pages: res.data
+	        });
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'generateFooterMenu',
+	    value: function generateFooterMenu() {
+	      return this.state.pages.map(function (page) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: page.id },
+	          _react2.default.createElement(
+	            _reactRouterDom.Link,
+	            { to: '/page/' + page.id },
+	            page.title
+	          )
+	        );
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'footer',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'small-8 small-offset-2 columns' },
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'no-bullet' },
+	            this.generateFooterMenu()
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Footer;
+	}(_react.Component);
+
+	exports.default = Footer;
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -27005,7 +27121,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ListElement = __webpack_require__(251);
+	var _ListElement = __webpack_require__(252);
 
 	var _ListElement2 = _interopRequireDefault(_ListElement);
 
@@ -27029,7 +27145,7 @@
 	exports.default = ArticlesList;
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27092,7 +27208,7 @@
 	exports.default = ListElement;
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27116,6 +27232,10 @@
 	var _Nav = __webpack_require__(249);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _Footer = __webpack_require__(250);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27166,7 +27286,7 @@
 
 
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
 	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
@@ -27193,7 +27313,8 @@
 	              date
 	            )
 	          )
-	        )
+	        ),
+	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
 	  }]);
@@ -27204,7 +27325,7 @@
 	exports.default = Article;
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27318,7 +27439,7 @@
 	exports.default = NewArticle;
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27343,7 +27464,7 @@
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
-	var _ArticlesListAdmin = __webpack_require__(255);
+	var _ArticlesListAdmin = __webpack_require__(256);
 
 	var _ArticlesListAdmin2 = _interopRequireDefault(_ArticlesListAdmin);
 
@@ -27402,8 +27523,13 @@
 	            ),
 	            _react2.default.createElement(
 	              _reactRouterDom.Link,
-	              { to: '/newArticle', className: 'button expanded success' },
+	              { to: '/newArticle', className: 'button success' },
 	              'ADD NEW ARTICLE'
+	            ),
+	            _react2.default.createElement(
+	              _reactRouterDom.Link,
+	              { to: '/editPages', className: 'button' },
+	              'EDIT PAGES'
 	            ),
 	            _react2.default.createElement('hr', null)
 	          )
@@ -27419,7 +27545,7 @@
 	exports.default = MainAdmin;
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27434,7 +27560,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ListElementAdmin = __webpack_require__(256);
+	var _ListElementAdmin = __webpack_require__(257);
 
 	var _ListElementAdmin2 = _interopRequireDefault(_ListElementAdmin);
 
@@ -27458,7 +27584,7 @@
 	exports.default = ArticlesListAdmin;
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27515,7 +27641,7 @@
 	      ),
 	      _react2.default.createElement(
 	        _reactRouterDom.Link,
-	        { to: '/edit/' + id, className: 'button' },
+	        { to: '/edit/' + id, className: 'button success' },
 	        'Edit/Remove article'
 	      ),
 	      _react2.default.createElement('hr', null)
@@ -27526,7 +27652,7 @@
 	exports.default = ListElementAdmin;
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27722,7 +27848,7 @@
 	exports.default = EditArticle;
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27830,6 +27956,512 @@
 	}(_react.Component);
 
 	exports.default = Page;
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouterDom = __webpack_require__(182);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _PagesListAdmin = __webpack_require__(261);
+
+	var _PagesListAdmin2 = _interopRequireDefault(_PagesListAdmin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PageAdmin = function (_Component) {
+	  _inherits(PageAdmin, _Component);
+
+	  function PageAdmin(props) {
+	    _classCallCheck(this, PageAdmin);
+
+	    var _this = _possibleConstructorReturn(this, (PageAdmin.__proto__ || Object.getPrototypeOf(PageAdmin)).call(this, props));
+
+	    _this.state = {
+	      pages: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(PageAdmin, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      _axios2.default.get('http://localhost:8000/pages').then(function (res) {
+	        _this2.setState({
+	          pages: res.data
+	        });
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Admin area'
+	            ),
+	            _react2.default.createElement(
+	              _reactRouterDom.Link,
+	              { to: '/newPage', className: 'button expanded success' },
+	              'ADD NEW PAGE'
+	            ),
+	            _react2.default.createElement('hr', null)
+	          )
+	        ),
+	        _react2.default.createElement(_PagesListAdmin2.default, { pages: this.state.pages })
+	      );
+	    }
+	  }]);
+
+	  return PageAdmin;
+	}(_react.Component);
+
+	exports.default = PageAdmin;
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ListElementPage = __webpack_require__(262);
+
+	var _ListElementPage2 = _interopRequireDefault(_ListElementPage);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PagesListAdmin = function PagesListAdmin(props) {
+	  var pages = props.pages;
+
+
+	  var List = pages.map(function (page) {
+	    return _react2.default.createElement(_ListElementPage2.default, _extends({ key: page.id }, page));
+	  });
+
+	  return _react2.default.createElement(
+	    "ul",
+	    { className: "no-bullet" },
+	    List
+	  );
+	};
+
+	exports.default = PagesListAdmin;
+
+/***/ }),
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouterDom = __webpack_require__(182);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ListElementPage = function ListElementPage(props) {
+	  var id = props.id,
+	      title = props.title,
+	      text = props.text,
+	      date = props.date;
+
+
+	  var shortText = text.substring(0, 200) + "...";
+
+	  return _react2.default.createElement(
+	    'li',
+	    { className: 'row' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'small-8 small-offset-2 columns' },
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        shortText
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        date.substring(0, 10)
+	      ),
+	      _react2.default.createElement(
+	        _reactRouterDom.Link,
+	        { to: '/editPage/' + id, className: 'button' },
+	        'Edit/Remove page'
+	      ),
+	      _react2.default.createElement('hr', null)
+	    )
+	  );
+	};
+
+	exports.default = ListElementPage;
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouterDom = __webpack_require__(182);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewPage = function (_Component) {
+	  _inherits(NewPage, _Component);
+
+	  function NewPage() {
+	    _classCallCheck(this, NewPage);
+
+	    return _possibleConstructorReturn(this, (NewPage.__proto__ || Object.getPrototypeOf(NewPage)).apply(this, arguments));
+	  }
+
+	  _createClass(NewPage, [{
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      var _this2 = this;
+
+	      e.preventDefault();
+	      var title = this.refs.title.value;
+	      var text = this.refs.text.value;
+	      var date = this.refs.date.value;
+	      console.log({ title: title, text: text, date: date });
+
+	      if (title.length > 0 && text.length > 0) {
+	        _axios2.default.post('http://localhost:8000/pages', { title: title, text: text, date: date }).then(function (res) {
+	          _this2.props.history.push("/editPages");
+	          console.log(res);
+	        }).catch(function (error) {
+	          console.log(error);
+	        });
+	      } else {
+	        this.refs.title.focus();
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var now = new Date();
+
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small-8 columns small-offset-2 text-left' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Admin area'
+	            ),
+	            _react2.default.createElement(
+	              'form',
+	              { onSubmit: this.handleSubmit.bind(this) },
+	              _react2.default.createElement('input', { type: 'text', ref: 'title', placeholder: 'Add a title' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text', placeholder: 'Write new page' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('input', { type: 'hidden', ref: 'date', value: now }),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'button success' },
+	                'Add page'
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	    //ref={input => {this.name = input;}}
+
+	  }]);
+
+	  return NewPage;
+	}(_react.Component);
+
+	exports.default = NewPage;
+
+/***/ }),
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EditPage = function (_Component) {
+	  _inherits(EditPage, _Component);
+
+	  function EditPage(props) {
+	    _classCallCheck(this, EditPage);
+
+	    var _this = _possibleConstructorReturn(this, (EditPage.__proto__ || Object.getPrototypeOf(EditPage)).call(this, props));
+
+	    _this.state = { page: "" };
+	    return _this;
+	  }
+
+	  _createClass(EditPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var id = this.props.match.params.id;
+
+
+	      var URL = 'http://localhost:8000/pages/' + id;
+
+	      _axios2.default.get(URL).then(function (res) {
+	        _this2.setState({
+	          page: res.data
+	        });
+	        _this2.refs.title.focus();
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'handleFocus',
+	    value: function handleFocus(e) {
+	      var _state$page = this.state.page,
+	          title = _state$page.title,
+	          text = _state$page.text;
+
+	      this.refs.title.value = title;
+	      this.refs.text.value = text;
+	    }
+	  }, {
+	    key: 'handleBlur',
+	    value: function handleBlur(e) {
+	      var title = this.refs.title.value;
+	      var text = this.refs.text.value;
+	      var _state$page2 = this.state.page,
+	          id = _state$page2.id,
+	          date = _state$page2.date;
+
+	      this.setState({
+	        page: { id: id, title: title, text: text, date: date }
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      var _this3 = this;
+
+	      e.preventDefault;
+	      var title = this.refs.title.value;
+	      var text = this.refs.text.value;
+	      var id = this.state.page.id;
+	      console.log({ id: id, title: title, text: text });
+
+	      var URL = 'http://localhost:8000/pages/' + id;
+
+	      _axios2.default.put(URL, { title: title, text: text }).then(function (res) {
+	        _this3.props.history.push("/editPages");
+	        console.log(res);
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'handleDelete',
+	    value: function handleDelete() {
+	      var _this4 = this;
+
+	      var id = this.state.page.id;
+
+	      _axios2.default.delete('http://localhost:8000/pages/' + id).then(function (res) {
+	        console.log(res);
+	        _this4.props.history.push("/editPages");
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _state$page3 = this.state.page,
+	          title = _state$page3.title,
+	          text = _state$page3.text,
+	          date = _state$page3.date;
+
+
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Admin area'
+	            ),
+	            _react2.default.createElement(
+	              'form',
+	              { onFocus: this.handleFocus.bind(this),
+	                onSubmit: this.handleSubmit.bind(this),
+	                onBlur: this.handleBlur.bind(this)
+	              },
+	              _react2.default.createElement('input', { type: 'text', ref: 'title' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'button' },
+	                'Save edits'
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Beware! Removed page cannot be undeleted!'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'button alert', onClick: this.handleDelete.bind(this) },
+	              'Delete this page'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return EditPage;
+	}(_react.Component);
+
+	exports.default = EditPage;
 
 /***/ })
 /******/ ]);
