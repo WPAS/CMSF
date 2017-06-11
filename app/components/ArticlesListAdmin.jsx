@@ -11,7 +11,7 @@ const ArticlesListAdmin = function(props) {
   )
 
   return (
-    <ul>{ List }</ul>
+    <ul className="no-bullet">{ List }</ul>
   )
 };
 

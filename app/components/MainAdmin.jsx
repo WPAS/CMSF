@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import Nav from 'Nav';
 import ArticlesListAdmin from 'ArticlesListAdmin';
@@ -27,7 +28,13 @@ class MainAdmin extends Component {
     return(
       <main>
         <Nav />
-        <h3>Admin area</h3>
+        <div className="row">
+          <div className="small-8 small-offset-2 columns">
+          <h3>Admin area</h3>
+          <Link to="/newArticle" className="button expanded success">ADD NEW ARTICLE</Link>
+          <hr />
+          </div>
+        </div>
         <ArticlesListAdmin articles={this.state.articles} />
       </main>
     )

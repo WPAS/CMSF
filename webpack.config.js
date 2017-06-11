@@ -17,6 +17,7 @@ module.exports = {
       ArticlesListAdmin: 'app/components/ArticlesListAdmin',
       ListElementAdmin: 'app/components/ListElementAdmin',
       EditArticle: 'app/components/EditArticle',
+      Page: 'app/components/Page',
     },
     extensions: ['', '.js', '.jsx'],
   },

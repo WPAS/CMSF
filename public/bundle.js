@@ -76,6 +76,10 @@
 
 	var _EditArticle2 = _interopRequireDefault(_EditArticle);
 
+	var _Page = __webpack_require__(258);
+
+	var _Page2 = _interopRequireDefault(_Page);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -88,7 +92,8 @@
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default }),
 	    _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _MainAdmin2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/edit/:id', component: _EditArticle2.default })
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/edit/:id', component: _EditArticle2.default }),
+	    _react2.default.createElement(_reactRouterDom.Route, { path: '/page/:id', component: _Page2.default })
 	  )
 	), document.getElementById("app"));
 
@@ -26958,17 +26963,26 @@
 
 	var Nav = function Nav() {
 	  return _react2.default.createElement(
-	    'nav',
+	    'header',
 	    null,
 	    _react2.default.createElement(
 	      'h1',
-	      null,
+	      { className: 'text-center' },
 	      'Best website ever ;)'
 	    ),
 	    _react2.default.createElement(
-	      _reactRouterDom.Link,
-	      { to: '/' },
-	      'Main page'
+	      'nav',
+	      { className: 'top-bar row' },
+	      _react2.default.createElement(
+	        _reactRouterDom.Link,
+	        { to: '/', className: 'small-4 small-offset-1 medium-2 medium-offset-1 columns' },
+	        'Main page'
+	      ),
+	      _react2.default.createElement(
+	        _reactRouterDom.Link,
+	        { to: '/page/1', className: 'small-7 medium-9 columns' },
+	        'About us'
+	      )
 	    )
 	  );
 	};
@@ -27007,7 +27021,7 @@
 
 	  return _react2.default.createElement(
 	    "ul",
-	    null,
+	    { className: "no-bullet" },
 	    List
 	  );
 	};
@@ -27040,32 +27054,37 @@
 	      date = props.date;
 
 
-	  var shortText = text.substring(0, 121) + "...";
+	  var shortText = text.substring(0, 200) + "...";
 
 	  return _react2.default.createElement(
 	    'li',
-	    null,
+	    { className: 'row' },
 	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      title
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      shortText
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      author,
-	      ', ',
-	      date.substring(0, 10)
-	    ),
-	    _react2.default.createElement(
-	      _reactRouterDom.Link,
-	      { to: '/articles/' + id },
-	      'Read more >>'
+	      'div',
+	      { className: 'small-8 small-offset-2 columns' },
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        shortText
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        author,
+	        ', ',
+	        date.substring(0, 10)
+	      ),
+	      _react2.default.createElement(
+	        _reactRouterDom.Link,
+	        { to: '/articles/' + id },
+	        'Read more >>'
+	      ),
+	      _react2.default.createElement('hr', null)
 	    )
 	  );
 	};
@@ -27152,23 +27171,27 @@
 	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
 	          'article',
-	          null,
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'h3',
-	            null,
-	            title
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            text
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            author,
-	            ', ',
-	            date
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              title
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              text
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'text-right' },
+	              author,
+	              ', ',
+	              date
+	            )
 	          )
 	        )
 	      );
@@ -27256,29 +27279,36 @@
 	        null,
 	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          'Admin area'
-	        ),
-	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.handleSubmit.bind(this) },
-	          _react2.default.createElement('input', { type: 'text', ref: 'title', placeholder: 'Add a title' }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text', placeholder: 'Write new article' }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('input', { type: 'text', ref: 'author', placeholder: 'Add author\'s name' }),
-	          _react2.default.createElement('input', { type: 'hidden', ref: 'date', value: now }),
+	          'div',
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'button',
-	            null,
-	            'Add Article'
+	            'div',
+	            { className: 'small-8 columns small-offset-2 text-left' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Admin area'
+	            ),
+	            _react2.default.createElement(
+	              'form',
+	              { onSubmit: this.handleSubmit.bind(this) },
+	              _react2.default.createElement('input', { type: 'text', ref: 'title', placeholder: 'Add a title' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text', placeholder: 'Write new article' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('input', { type: 'text', ref: 'author', placeholder: 'Add author\'s name' }),
+	              _react2.default.createElement('input', { type: 'hidden', ref: 'date', value: now }),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'button success' },
+	                'Add Article'
+	              )
+	            )
 	          )
 	        )
 	      );
 	    }
 	    //ref={input => {this.name = input;}}
-	    //        this.context.router.push('/admin')
 
 	  }]);
 
@@ -27306,6 +27336,8 @@
 	var _axios = __webpack_require__(223);
 
 	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouterDom = __webpack_require__(182);
 
 	var _Nav = __webpack_require__(249);
 
@@ -27358,9 +27390,23 @@
 	        null,
 	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          'Admin area'
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Admin area'
+	            ),
+	            _react2.default.createElement(
+	              _reactRouterDom.Link,
+	              { to: '/newArticle', className: 'button expanded success' },
+	              'ADD NEW ARTICLE'
+	            ),
+	            _react2.default.createElement('hr', null)
+	          )
 	        ),
 	        _react2.default.createElement(_ArticlesListAdmin2.default, { articles: this.state.articles })
 	      );
@@ -27404,7 +27450,7 @@
 
 	  return _react2.default.createElement(
 	    "ul",
-	    null,
+	    { className: "no-bullet" },
 	    List
 	  );
 	};
@@ -27442,45 +27488,37 @@
 	      onDelete = props.onDelete;
 
 
-	  var shortText = text.substring(0, 121) + "...";
-
-	  var onButtonClick = function onButtonClick() {
-	    _axios2.default.delete('http://localhost:8000/articles/' + id).then(function (res) {
-	      console.log(res);
-	    }).catch(function (error) {
-	      console.log(error);
-	    });
-	  };
+	  var shortText = text.substring(0, 200) + "...";
 
 	  return _react2.default.createElement(
 	    'li',
-	    null,
+	    { className: 'row' },
 	    _react2.default.createElement(
-	      'h3',
-	      null,
-	      title
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      shortText
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      author,
-	      ', ',
-	      date.substring(0, 10)
-	    ),
-	    _react2.default.createElement(
-	      _reactRouterDom.Link,
-	      { to: '/edit/' + id },
-	      'Edit'
-	    ),
-	    _react2.default.createElement(
-	      'button',
-	      { onClick: onButtonClick },
-	      'Delete'
+	      'div',
+	      { className: 'small-8 small-offset-2 columns' },
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        shortText
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        author,
+	        ', ',
+	        date.substring(0, 10)
+	      ),
+	      _react2.default.createElement(
+	        _reactRouterDom.Link,
+	        { to: '/edit/' + id, className: 'button' },
+	        'Edit/Remove article'
+	      ),
+	      _react2.default.createElement('hr', null)
 	    )
 	  );
 	};
@@ -27598,6 +27636,20 @@
 	      });
 	    }
 	  }, {
+	    key: 'handleDelete',
+	    value: function handleDelete() {
+	      var _this4 = this;
+
+	      var id = this.state.article.id;
+
+	      _axios2.default.delete('http://localhost:8000/articles/' + id).then(function (res) {
+	        console.log(res);
+	        _this4.props.history.push("/admin");
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _state$article3 = this.state.article,
@@ -27612,25 +27664,52 @@
 	        null,
 	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          'Admin area'
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Admin area'
+	            ),
+	            _react2.default.createElement(
+	              'form',
+	              { onFocus: this.handleFocus.bind(this),
+	                onSubmit: this.handleSubmit.bind(this),
+	                onBlur: this.handleBlur.bind(this)
+	              },
+	              _react2.default.createElement('input', { type: 'text', ref: 'title' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text' }),
+	              _react2.default.createElement('br', null),
+	              _react2.default.createElement('input', { type: 'text', ref: 'author' }),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'button' },
+	                'Save edits'
+	              )
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(
-	          'form',
-	          { onFocus: this.handleFocus.bind(this),
-	            onSubmit: this.handleSubmit.bind(this),
-	            onBlur: this.handleBlur.bind(this)
-	          },
-	          _react2.default.createElement('input', { type: 'text', ref: 'title' }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('textarea', { rows: '15', cols: '75', ref: 'text' }),
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('input', { type: 'text', ref: 'author' }),
+	          'div',
+	          { className: 'row' },
 	          _react2.default.createElement(
-	            'button',
-	            null,
-	            'Save edits'
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement('hr', null),
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Beware! Removed article cannot be undeleted!'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'button alert', onClick: this.handleDelete.bind(this) },
+	              'Delete this article'
+	            )
 	          )
 	        )
 	      );
@@ -27641,6 +27720,116 @@
 	}(_react.Component);
 
 	exports.default = EditArticle;
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _reactRouterDom = __webpack_require__(182);
+
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Page = function (_Component) {
+	  _inherits(Page, _Component);
+
+	  function Page(props) {
+	    _classCallCheck(this, Page);
+
+	    var _this = _possibleConstructorReturn(this, (Page.__proto__ || Object.getPrototypeOf(Page)).call(this, props));
+
+	    _this.state = { page: { title: "", text: "Loading...", date: "" } };
+	    return _this;
+	  }
+
+	  _createClass(Page, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      var id = this.props.match.params.id;
+
+
+	      var URL = 'http://localhost:8000/pages/' + id;
+
+	      _axios2.default.get(URL).then(function (res) {
+	        _this2.setState({
+	          page: res.data
+	        });
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _state$page = this.state.page,
+	          title = _state$page.title,
+	          text = _state$page.text,
+	          date = _state$page.date;
+
+	      var shortDate = date.substring(4, 15);
+
+	      return _react2.default.createElement(
+	        'main',
+	        null,
+	        _react2.default.createElement(_Nav2.default, null),
+	        _react2.default.createElement(
+	          'article',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'small-8 small-offset-2 columns' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              title
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              text
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'text-right' },
+	              shortDate
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Page;
+	}(_react.Component);
+
+	exports.default = Page;
 
 /***/ })
 /******/ ]);

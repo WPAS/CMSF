@@ -4,21 +4,21 @@ import { Link } from 'react-router-dom';
 
 import Nav from 'Nav';
 
-class Article extends Component {
+class Page extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { article: "" };
+    this.state = { page: { title: "", text: "Loading...", date: ""} };
   }
 
   componentDidMount() {
     const { id } = this.props.match.params;
 
-    const URL = `http://localhost:8000/articles/${id}`
+    const URL = `http://localhost:8000/pages/${id}`
 
     axios.get(URL).then(res => {
         this.setState({
-          article: res.data
+          page: res.data
         });
       }).catch(error => {
         console.log(error)
@@ -26,7 +26,8 @@ class Article extends Component {
   }
 
   render() {
-    const { title, text, author, date } = this.state.article;
+    const { title, text, date } = this.state.page;
+    const shortDate = date.substring(4, 15);
 
     return(
       <main >
@@ -35,7 +36,7 @@ class Article extends Component {
           <div className="small-8 small-offset-2 columns">
             <h3 >{title}</h3>
             <p>{text}</p>
-            <p className="text-right">{author}, {date}</p>
+            <p className="text-right">{shortDate}</p>
           </div>
         </article>
       </main>
@@ -43,4 +44,4 @@ class Article extends Component {
   }
 }
 
-export default Article;
+export default Page;

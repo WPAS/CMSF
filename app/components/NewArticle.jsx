@@ -18,7 +18,7 @@ class NewArticle extends Component {
       axios.post('http://localhost:8000/articles', { title, text, author, date })
       .then(res => {
         this.props.history.push("/admin");
-        console.log(res) })        
+        console.log(res) })
       .catch(error => { console.log(error) });
     } else {
       this.refs.title.focus();
@@ -31,20 +31,22 @@ class NewArticle extends Component {
     return (
       <main>
         <Nav />
-        <h3>Admin area</h3>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="title" placeholder="Add a title"></input><br/>
-          <textarea rows="15" cols="75" ref="text" placeholder="Write new article" /><br/>
-          <input type="text" ref="author" placeholder="Add author's name"></input>
-          <input type="hidden" ref="date" value={now}></input>
-          <button>Add Article</button>
-        </form>
+        <div className="row">
+          <div className="small-8 columns small-offset-2 text-left">
+            <h3>Admin area</h3>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <input type="text" ref="title" placeholder="Add a title"></input><br/>
+              <textarea rows="15" cols="75" ref="text" placeholder="Write new article" /><br/>
+              <input type="text" ref="author" placeholder="Add author's name"></input>
+              <input type="hidden" ref="date" value={now}></input>
+              <button className="button success">Add Article</button>
+            </form>
+          </div>
+        </div>
       </main>
     );
   }
 //ref={input => {this.name = input;}}
-//        this.context.router.push('/admin')
-
 }
 
 export default NewArticle;

@@ -7,6 +7,7 @@ import Article from 'Article';
 import NewArticle from 'NewArticle';
 import MainAdmin from 'MainAdmin';
 import EditArticle from 'EditArticle';
+import Page from 'Page';
 
 ReactDOM.render(
   <HashRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path="/newArticle" component={NewArticle} />
         <Route path="/admin" component={MainAdmin} />
         <Route path="/edit/:id" component={EditArticle} />
+        <Route path="/page/:id" component={Page} />
     </div>
   </HashRouter>
   ,document.getElementById("app"));

@@ -59,22 +59,44 @@ class EditArticle extends Component {
     .catch(error => { console.log(error) });
   }
 
+  handleDelete() {
+    const { id } = this.state.article;
+    axios.delete(`http://localhost:8000/articles/${id}`)
+    .then(res => {
+      console.log(res);
+      this.props.history.push("/admin");
+     })
+    .catch(error => { console.log(error) });
+  }
+
+
   render() {
     const { title, text, author, date } = this.state.article;
 
     return(
       <main>
         <Nav />
-        <h3>Admin area</h3>
-        <form onFocus={this.handleFocus.bind(this)}
-              onSubmit={this.handleSubmit.bind(this)}
-              onBlur={this.handleBlur.bind(this)}
-              >
-          <input type="text" ref="title"></input><br/>
-          <textarea rows="15" cols="75" ref="text" /><br/>
-          <input type="text" ref="author"></input>
-          <button>Save edits</button>
-        </form>
+        <div className="row">
+          <div className="small-8 small-offset-2 columns">
+            <h3>Admin area</h3>
+            <form onFocus={this.handleFocus.bind(this)}
+                  onSubmit={this.handleSubmit.bind(this)}
+                  onBlur={this.handleBlur.bind(this)}
+                  >
+              <input type="text" ref="title"></input><br/>
+              <textarea rows="15" cols="75" ref="text" /><br/>
+              <input type="text" ref="author"></input>
+              <button className="button">Save edits</button>
+            </form>
+          </div>
+        </div>
+        <div className="row">
+          <div className="small-8 small-offset-2 columns">
+            <hr />
+            <h3>Beware! Removed article cannot be undeleted!</h3>
+            <button className="button alert" onClick={this.handleDelete.bind(this)}>Delete this article</button>
+          </div>
+        </div>
       </main>
     )
   }
