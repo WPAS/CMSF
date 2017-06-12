@@ -53,8 +53,6 @@ class EditPage extends Component {
   }
 
   render() {
-    const { title, text, date } = this.state.page;
-
     return(
       <div>
         <section className="row">

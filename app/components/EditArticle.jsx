@@ -55,8 +55,6 @@ class EditArticle extends Component {
   }
 
   render() {
-    const { title, text, author, date } = this.state.article;
-
     return(
       <div>
         <section className="row">
