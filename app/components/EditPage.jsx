@@ -17,24 +17,12 @@ class EditPage extends Component {
         this.setState({
           page: res.data
         });
+        const { title, text } = this.state.page;
+        this.refs.title.value = title;
+        this.refs.text.value = text;
         this.refs.title.focus();
       }).catch(error => {
         console.log(error)
-      });
-  }
-
-  handleFocus(e) {
-    const { title, text } = this.state.page;
-    this.refs.title.value = title;
-    this.refs.text.value = text;
-  }
-
-  handleBlur(e) {
-    const title = this.refs.title.value;
-    const text = this.refs.text.value;
-    const { id, date } = this.state.page;
-    this.setState({
-      page: { id, title, text, date }
     });
   }
 
@@ -64,7 +52,6 @@ class EditPage extends Component {
     .catch(error => { console.log(error) });
   }
 
-
   render() {
     const { title, text, date } = this.state.page;
 
@@ -73,10 +60,7 @@ class EditPage extends Component {
         <section className="row">
           <div className="small-8 small-offset-2 columns">
             <h3>Admin area</h3>
-            <form onFocus={this.handleFocus.bind(this)}
-                  onSubmit={this.handleSubmit.bind(this)}
-                  onBlur={this.handleBlur.bind(this)}
-                  >
+            <form onSubmit={this.handleSubmit.bind(this)}>
               <input type="text" ref="title"></input><br/>
               <textarea rows="15" cols="75" ref="text" /><br/>
               <button className="button">Save edits</button>

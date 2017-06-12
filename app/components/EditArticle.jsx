@@ -17,27 +17,14 @@ class EditArticle extends Component {
         this.setState({
           article: res.data
         });
+        const { title, text, author } = this.state.article;
+        this.refs.title.value = title;
+        this.refs.text.value = text;
+        this.refs.author.value = author;
         this.refs.title.focus();
       }).catch(error => {
         console.log(error)
       });
-  }
-
-  handleFocus(e) {
-    const { title, text, author } = this.state.article;
-    this.refs.title.value = title;
-    this.refs.text.value = text;
-    this.refs.author.value = author;
-  }
-
-  handleBlur(e) {
-    const title = this.refs.title.value;
-    const text = this.refs.text.value;
-    const author = this.refs.author.value;
-    const { id, date } = this.state.article;
-    this.setState({
-      article: { id, title, text, author, date }
-    });
   }
 
   handleSubmit(e) {
@@ -67,7 +54,6 @@ class EditArticle extends Component {
     .catch(error => { console.log(error) });
   }
 
-
   render() {
     const { title, text, author, date } = this.state.article;
 
@@ -76,10 +62,7 @@ class EditArticle extends Component {
         <section className="row">
           <div className="small-8 small-offset-2 columns">
             <h3>Admin area</h3>
-            <form onFocus={this.handleFocus.bind(this)}
-                  onSubmit={this.handleSubmit.bind(this)}
-                  onBlur={this.handleBlur.bind(this)}
-                  >
+            <form onSubmit={this.handleSubmit.bind(this)}>
               <input type="text" ref="title"></input><br/>
               <textarea rows="15" cols="75" ref="text" /><br/>
               <input type="text" ref="author"></input>
