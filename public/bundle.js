@@ -27262,8 +27262,8 @@
 	  }
 
 	  _createClass(Article, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'getArticle',
+	    value: function getArticle() {
 	      var _this2 = this;
 
 	      var id = this.props.match.params.id;
@@ -27278,6 +27278,18 @@
 	      }).catch(function (error) {
 	        console.log(error);
 	      });
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.getArticle();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps) {
+	      if (prevProps !== this.props) {
+	        this.getArticle();
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -27963,6 +27975,10 @@
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
+	var _NewestArticles = __webpack_require__(254);
+
+	var _NewestArticles2 = _interopRequireDefault(_NewestArticles);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27979,13 +27995,13 @@
 
 	    var _this = _possibleConstructorReturn(this, (Page.__proto__ || Object.getPrototypeOf(Page)).call(this, props));
 
-	    _this.state = { page: { title: "", text: "Loading...", date: "" } };
+	    _this.state = { page: { id: "", title: "", text: "Loading...", date: "" } };
 	    return _this;
 	  }
 
 	  _createClass(Page, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
+	    key: 'getPage',
+	    value: function getPage() {
 	      var _this2 = this;
 
 	      var id = this.props.match.params.id;
@@ -28000,6 +28016,18 @@
 	      }).catch(function (error) {
 	        console.log(error);
 	      });
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.getPage();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps) {
+	      if (prevProps !== this.props) {
+	        this.getPage();
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -28038,6 +28066,7 @@
 	            )
 	          )
 	        ),
+	        _react2.default.createElement(_NewestArticles2.default, null),
 	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }

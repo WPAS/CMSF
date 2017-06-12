@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 
 import Nav from 'Nav';
 import Footer from 'Footer';
+import NewestArticles from 'NewestArticles';
 
 class Page extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { page: { title: "", text: "Loading...", date: ""} };
+    this.state = { page: { id: "", title: "", text: "Loading...", date: ""} };
   }
 
-  componentDidMount() {
+  getPage() {
     const { id } = this.props.match.params;
 
     const URL = `http://localhost:8000/pages/${id}`
@@ -24,6 +25,16 @@ class Page extends Component {
       }).catch(error => {
         console.log(error)
       });
+  }
+
+  componentDidMount() {
+    this.getPage();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.getPage();
+    }
   }
 
   render() {
@@ -40,6 +51,7 @@ class Page extends Component {
             <p className="text-right">{shortDate}</p>
           </div>
         </article>
+        <NewestArticles />
         <Footer />
       </main>
     )

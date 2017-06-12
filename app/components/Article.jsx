@@ -13,7 +13,7 @@ class Article extends Component {
     this.state = { article: "" };
   }
 
-  componentDidMount() {
+  getArticle() {
     const { id } = this.props.match.params;
 
     const URL = `http://localhost:8000/articles/${id}`
@@ -25,6 +25,16 @@ class Article extends Component {
       }).catch(error => {
         console.log(error)
       });
+  }
+
+  componentDidMount() {
+    this.getArticle();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.getArticle();
+    }
   }
 
   render() {
