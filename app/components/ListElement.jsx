@@ -9,7 +9,7 @@ const ListElement = props => {
   return (
     <li className="row">
       <div className="small-8 small-offset-2 columns">
-        <h3>{title}</h3>
+        <h4>{title}</h4>
         <p>{shortText}</p>
         <p>{author}, {date.substring(0,10)}</p>
         <Link to={`/articles/${id}`}>

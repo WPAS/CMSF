@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import Nav from 'Nav';
+import Footer from 'Footer';
 
 class Page extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class Page extends Component {
             <p className="text-right">{shortDate}</p>
           </div>
         </article>
+        <Footer />
       </main>
     )
   }

@@ -24,6 +24,7 @@ module.exports = {
       NewPage: 'app/components/NewPage',
       EditPage: 'app/components/EditPage',
       Footer: 'app/components/Footer',
+      NewestArticles: 'app/components/NewestArticles',
     },
     extensions: ['', '.js', '.jsx'],
   },

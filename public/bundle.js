@@ -64,31 +64,31 @@
 
 	var _Article2 = _interopRequireDefault(_Article);
 
-	var _NewArticle = __webpack_require__(254);
+	var _NewArticle = __webpack_require__(255);
 
 	var _NewArticle2 = _interopRequireDefault(_NewArticle);
 
-	var _MainAdmin = __webpack_require__(255);
+	var _MainAdmin = __webpack_require__(256);
 
 	var _MainAdmin2 = _interopRequireDefault(_MainAdmin);
 
-	var _EditArticle = __webpack_require__(258);
+	var _EditArticle = __webpack_require__(259);
 
 	var _EditArticle2 = _interopRequireDefault(_EditArticle);
 
-	var _Page = __webpack_require__(259);
+	var _Page = __webpack_require__(260);
 
 	var _Page2 = _interopRequireDefault(_Page);
 
-	var _PageAdmin = __webpack_require__(260);
+	var _PageAdmin = __webpack_require__(261);
 
 	var _PageAdmin2 = _interopRequireDefault(_PageAdmin);
 
-	var _NewPage = __webpack_require__(263);
+	var _NewPage = __webpack_require__(264);
 
 	var _NewPage2 = _interopRequireDefault(_NewPage);
 
-	var _EditPage = __webpack_require__(264);
+	var _EditPage = __webpack_require__(265);
 
 	var _EditPage2 = _interopRequireDefault(_EditPage);
 
@@ -27179,7 +27179,7 @@
 	      'div',
 	      { className: 'small-8 small-offset-2 columns' },
 	      _react2.default.createElement(
-	        'h3',
+	        'h4',
 	        null,
 	        title
 	      ),
@@ -27236,6 +27236,10 @@
 	var _Footer = __webpack_require__(250);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
+
+	var _NewestArticles = __webpack_require__(254);
+
+	var _NewestArticles2 = _interopRequireDefault(_NewestArticles);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27314,6 +27318,7 @@
 	            )
 	          )
 	        ),
+	        _react2.default.createElement(_NewestArticles2.default, null),
 	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
@@ -27326,6 +27331,87 @@
 
 /***/ }),
 /* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(223);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _ArticlesList = __webpack_require__(251);
+
+	var _ArticlesList2 = _interopRequireDefault(_ArticlesList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewestArticles = function (_Component) {
+	  _inherits(NewestArticles, _Component);
+
+	  function NewestArticles(props) {
+	    _classCallCheck(this, NewestArticles);
+
+	    var _this = _possibleConstructorReturn(this, (NewestArticles.__proto__ || Object.getPrototypeOf(NewestArticles)).call(this, props));
+
+	    _this.state = {
+	      articles: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(NewestArticles, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      _axios2.default.get('http://localhost:8000/newestArticles').then(function (res) {
+	        _this2.setState({
+	          articles: res.data
+	        });
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'section',
+	        { className: 'row' },
+	        _react2.default.createElement('hr', null),
+	        _react2.default.createElement(
+	          'h3',
+	          { className: 'small-8 small-offset-2 columns text-center' },
+	          'Read our newest articles'
+	        ),
+	        _react2.default.createElement(_ArticlesList2.default, { articles: this.state.articles })
+	      );
+	    }
+	  }]);
+
+	  return NewestArticles;
+	}(_react.Component);
+
+	exports.default = NewestArticles;
+
+/***/ }),
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27439,7 +27525,7 @@
 	exports.default = NewArticle;
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27464,7 +27550,7 @@
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
-	var _ArticlesListAdmin = __webpack_require__(256);
+	var _ArticlesListAdmin = __webpack_require__(257);
 
 	var _ArticlesListAdmin2 = _interopRequireDefault(_ArticlesListAdmin);
 
@@ -27545,7 +27631,7 @@
 	exports.default = MainAdmin;
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27560,7 +27646,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ListElementAdmin = __webpack_require__(257);
+	var _ListElementAdmin = __webpack_require__(258);
 
 	var _ListElementAdmin2 = _interopRequireDefault(_ListElementAdmin);
 
@@ -27584,7 +27670,7 @@
 	exports.default = ArticlesListAdmin;
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27652,7 +27738,7 @@
 	exports.default = ListElementAdmin;
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27848,7 +27934,7 @@
 	exports.default = EditArticle;
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27872,6 +27958,10 @@
 	var _Nav = __webpack_require__(249);
 
 	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _Footer = __webpack_require__(250);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27947,7 +28037,8 @@
 	              shortDate
 	            )
 	          )
-	        )
+	        ),
+	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
 	  }]);
@@ -27958,7 +28049,7 @@
 	exports.default = Page;
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27983,7 +28074,7 @@
 
 	var _Nav2 = _interopRequireDefault(_Nav);
 
-	var _PagesListAdmin = __webpack_require__(261);
+	var _PagesListAdmin = __webpack_require__(262);
 
 	var _PagesListAdmin2 = _interopRequireDefault(_PagesListAdmin);
 
@@ -28059,7 +28150,7 @@
 	exports.default = PageAdmin;
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28074,7 +28165,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ListElementPage = __webpack_require__(262);
+	var _ListElementPage = __webpack_require__(263);
 
 	var _ListElementPage2 = _interopRequireDefault(_ListElementPage);
 
@@ -28098,7 +28189,7 @@
 	exports.default = PagesListAdmin;
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28162,7 +28253,7 @@
 	exports.default = ListElementPage;
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28274,7 +28365,7 @@
 	exports.default = NewPage;
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

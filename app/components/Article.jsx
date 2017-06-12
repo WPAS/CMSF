@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Nav from 'Nav';
 import Footer from 'Footer';
+import NewestArticles from 'NewestArticles';
 
 class Article extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class Article extends Component {
             <p className="text-right">{author}, {date}</p>
           </div>
         </article>
+        <NewestArticles />
         <Footer />
       </div>
     )
