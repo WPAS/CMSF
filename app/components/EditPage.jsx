@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 
-import Nav from 'Nav';
-
 class EditPage extends Component {
   constructor(props) {
     super(props);
@@ -71,9 +69,8 @@ class EditPage extends Component {
     const { title, text, date } = this.state.page;
 
     return(
-      <main>
-        <Nav />
-        <div className="row">
+      <div>
+        <section className="row">
           <div className="small-8 small-offset-2 columns">
             <h3>Admin area</h3>
             <form onFocus={this.handleFocus.bind(this)}
@@ -85,15 +82,15 @@ class EditPage extends Component {
               <button className="button">Save edits</button>
             </form>
           </div>
-        </div>
-        <div className="row">
+        </section>
+        <section className="row">
           <div className="small-8 small-offset-2 columns">
             <hr />
             <h3>Beware! Removed page cannot be undeleted!</h3>
             <button className="button alert" onClick={this.handleDelete.bind(this)}>Delete this page</button>
           </div>
-        </div>
-      </main>
+        </section>
+      </div>
     )
   }
 }

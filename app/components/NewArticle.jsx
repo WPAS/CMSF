@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Nav from 'Nav';
-
 class NewArticle extends Component {
 
   handleSubmit(e) {
@@ -29,9 +27,8 @@ class NewArticle extends Component {
     const now = new Date();
 
     return (
-      <main>
-        <Nav />
-        <div className="row">
+      <div>
+        <section className="row">
           <div className="small-8 columns small-offset-2 text-left">
             <h3>Admin area</h3>
             <form onSubmit={this.handleSubmit.bind(this)}>
@@ -42,8 +39,8 @@ class NewArticle extends Component {
               <button className="button success">Add Article</button>
             </form>
           </div>
-        </div>
-      </main>
+        </section>
+      </div>
     );
   }
 //ref={input => {this.name = input;}}

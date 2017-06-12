@@ -92,6 +92,14 @@
 
 	var _EditPage2 = _interopRequireDefault(_EditPage);
 
+	var _Nav = __webpack_require__(249);
+
+	var _Nav2 = _interopRequireDefault(_Nav);
+
+	var _Footer = __webpack_require__(250);
+
+	var _Footer2 = _interopRequireDefault(_Footer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -100,15 +108,21 @@
 	  _react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _MainAdmin2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/edit/:id', component: _EditArticle2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/page/:id', component: _Page2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/editPages', component: _PageAdmin2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/newPage', component: _NewPage2.default }),
-	    _react2.default.createElement(_reactRouterDom.Route, { path: '/editPage/:id', component: _EditPage2.default })
+	    _react2.default.createElement(_Nav2.default, null),
+	    _react2.default.createElement(
+	      'main',
+	      null,
+	      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Main2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/articles/:id', component: _Article2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/newArticle', component: _NewArticle2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/admin', component: _MainAdmin2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/edit/:id', component: _EditArticle2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/page/:id', component: _Page2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/editPages', component: _PageAdmin2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/newPage', component: _NewPage2.default }),
+	      _react2.default.createElement(_reactRouterDom.Route, { path: '/editPage/:id', component: _EditPage2.default })
+	    ),
+	    _react2.default.createElement(_Footer2.default, null)
 	  )
 	), document.getElementById("app"));
 
@@ -25369,14 +25383,6 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
-	var _Footer = __webpack_require__(250);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
-
 	var _ArticlesList = __webpack_require__(251);
 
 	var _ArticlesList2 = _interopRequireDefault(_ArticlesList);
@@ -25420,11 +25426,9 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'main',
+	        'section',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
-	        _react2.default.createElement(_ArticlesList2.default, { articles: this.state.articles }),
-	        _react2.default.createElement(_Footer2.default, null)
+	        _react2.default.createElement(_ArticlesList2.default, { articles: this.state.articles })
 	      );
 	    }
 	  }]);
@@ -27229,14 +27233,6 @@
 
 	var _reactRouterDom = __webpack_require__(182);
 
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
-	var _Footer = __webpack_require__(250);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
-
 	var _NewestArticles = __webpack_require__(254);
 
 	var _NewestArticles2 = _interopRequireDefault(_NewestArticles);
@@ -27304,7 +27300,6 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
 	          'article',
 	          { className: 'row' },
@@ -27330,8 +27325,7 @@
 	            )
 	          )
 	        ),
-	        _react2.default.createElement(_NewestArticles2.default, null),
-	        _react2.default.createElement(_Footer2.default, null)
+	        _react2.default.createElement(_NewestArticles2.default, null)
 	      );
 	    }
 	  }]);
@@ -27444,10 +27438,6 @@
 
 	var _reactRouterDom = __webpack_require__(182);
 
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27494,11 +27484,10 @@
 	      var now = new Date();
 
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -27558,10 +27547,6 @@
 
 	var _reactRouterDom = __webpack_require__(182);
 
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
 	var _ArticlesListAdmin = __webpack_require__(257);
 
 	var _ArticlesListAdmin2 = _interopRequireDefault(_ArticlesListAdmin);
@@ -27605,11 +27590,10 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -27632,7 +27616,11 @@
 	            _react2.default.createElement('hr', null)
 	          )
 	        ),
-	        _react2.default.createElement(_ArticlesListAdmin2.default, { articles: this.state.articles })
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(_ArticlesListAdmin2.default, { articles: this.state.articles })
+	        )
 	      );
 	    }
 	  }]);
@@ -27769,10 +27757,6 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27884,11 +27868,10 @@
 
 
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -27918,7 +27901,7 @@
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -27966,14 +27949,6 @@
 	var _axios2 = _interopRequireDefault(_axios);
 
 	var _reactRouterDom = __webpack_require__(182);
-
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
-	var _Footer = __webpack_require__(250);
-
-	var _Footer2 = _interopRequireDefault(_Footer);
 
 	var _NewestArticles = __webpack_require__(254);
 
@@ -28040,11 +28015,10 @@
 	      var shortDate = date.substring(4, 15);
 
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'article',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -28066,8 +28040,7 @@
 	            )
 	          )
 	        ),
-	        _react2.default.createElement(_NewestArticles2.default, null),
-	        _react2.default.createElement(_Footer2.default, null)
+	        _react2.default.createElement(_NewestArticles2.default, null)
 	      );
 	    }
 	  }]);
@@ -28098,10 +28071,6 @@
 	var _axios2 = _interopRequireDefault(_axios);
 
 	var _reactRouterDom = __webpack_require__(182);
-
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
 
 	var _PagesListAdmin = __webpack_require__(262);
 
@@ -28146,11 +28115,10 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -28162,13 +28130,17 @@
 	            ),
 	            _react2.default.createElement(
 	              _reactRouterDom.Link,
-	              { to: '/newPage', className: 'button expanded success' },
+	              { to: '/newPage', className: 'button expanded' },
 	              'ADD NEW PAGE'
 	            ),
 	            _react2.default.createElement('hr', null)
 	          )
 	        ),
-	        _react2.default.createElement(_PagesListAdmin2.default, { pages: this.state.pages })
+	        _react2.default.createElement(
+	          'section',
+	          null,
+	          _react2.default.createElement(_PagesListAdmin2.default, { pages: this.state.pages })
+	        )
 	      );
 	    }
 	  }]);
@@ -28303,10 +28275,6 @@
 
 	var _reactRouterDom = __webpack_require__(182);
 
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28352,11 +28320,10 @@
 	      var now = new Date();
 
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -28384,8 +28351,6 @@
 	        )
 	      );
 	    }
-	    //ref={input => {this.name = input;}}
-
 	  }]);
 
 	  return NewPage;
@@ -28412,10 +28377,6 @@
 	var _axios = __webpack_require__(223);
 
 	var _axios2 = _interopRequireDefault(_axios);
-
-	var _Nav = __webpack_require__(249);
-
-	var _Nav2 = _interopRequireDefault(_Nav);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28523,11 +28484,10 @@
 
 
 	      return _react2.default.createElement(
-	        'main',
+	        'div',
 	        null,
-	        _react2.default.createElement(_Nav2.default, null),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',
@@ -28556,7 +28516,7 @@
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'div',
+	          'section',
 	          { className: 'row' },
 	          _react2.default.createElement(
 	            'div',

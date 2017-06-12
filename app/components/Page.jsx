@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Nav from 'Nav';
-import Footer from 'Footer';
 import NewestArticles from 'NewestArticles';
 
 class Page extends Component {
@@ -42,18 +40,16 @@ class Page extends Component {
     const shortDate = date.substring(4, 15);
 
     return(
-      <main >
-        <Nav />
-        <article className="row">
+      <div >
+        <section className="row">
           <div className="small-8 small-offset-2 columns">
             <h3 >{title}</h3>
             <p>{text}</p>
             <p className="text-right">{shortDate}</p>
           </div>
-        </article>
+        </section>
         <NewestArticles />
-        <Footer />
-      </main>
+      </div>
     )
   }
 }

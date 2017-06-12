@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import axios from 'axios';
 
-import Nav from 'Nav';
-
 class EditArticle extends Component {
   constructor(props) {
     super(props);
@@ -74,9 +72,8 @@ class EditArticle extends Component {
     const { title, text, author, date } = this.state.article;
 
     return(
-      <main>
-        <Nav />
-        <div className="row">
+      <div>
+        <section className="row">
           <div className="small-8 small-offset-2 columns">
             <h3>Admin area</h3>
             <form onFocus={this.handleFocus.bind(this)}
@@ -89,15 +86,15 @@ class EditArticle extends Component {
               <button className="button">Save edits</button>
             </form>
           </div>
-        </div>
-        <div className="row">
+        </section>
+        <section className="row">
           <div className="small-8 small-offset-2 columns">
             <hr />
             <h3>Beware! Removed article cannot be undeleted!</h3>
             <button className="button alert" onClick={this.handleDelete.bind(this)}>Delete this article</button>
           </div>
-        </div>
-      </main>
+        </section>
+      </div>
     )
   }
 }

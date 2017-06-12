@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Nav from 'Nav';
 import PagesListAdmin from 'PagesListAdmin';
 
 class PageAdmin extends Component {
@@ -26,17 +25,18 @@ class PageAdmin extends Component {
 
   render() {
     return(
-      <main>
-        <Nav />
-        <div className="row">
+      <div>
+        <section className="row">
           <div className="small-8 small-offset-2 columns">
           <h3>Admin area</h3>
-          <Link to="/newPage" className="button expanded success">ADD NEW PAGE</Link>
+          <Link to="/newPage" className="button expanded">ADD NEW PAGE</Link>
           <hr />
           </div>
-        </div>
-        <PagesListAdmin pages={this.state.pages} />
-      </main>
+        </section>
+        <section>
+          <PagesListAdmin pages={this.state.pages} />
+        </section>
+      </div>
     )
   }
 }

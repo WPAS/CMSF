@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Nav from 'Nav';
-import Footer from 'Footer';
 import NewestArticles from 'NewestArticles';
 
 class Article extends Component {
@@ -42,7 +40,6 @@ class Article extends Component {
 
     return(
       <div >
-        <Nav />
         <article className="row">
           <div className="small-8 small-offset-2 columns">
             <h3 >{title}</h3>
@@ -51,7 +48,6 @@ class Article extends Component {
           </div>
         </article>
         <NewestArticles />
-        <Footer />
       </div>
     )
   }

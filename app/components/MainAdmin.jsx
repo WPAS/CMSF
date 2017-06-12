@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Nav from 'Nav';
 import ArticlesListAdmin from 'ArticlesListAdmin';
 
 class MainAdmin extends Component {
@@ -26,18 +25,19 @@ class MainAdmin extends Component {
 
   render() {
     return(
-      <main>
-        <Nav />
-        <div className="row">
+      <div>
+        <section className="row">
           <div className="small-8 small-offset-2 columns">
           <h3>Admin area</h3>
           <Link to="/newArticle" className="button success">ADD NEW ARTICLE</Link>
           <Link to="/editPages" className="button">EDIT PAGES</Link>
           <hr />
           </div>
-        </div>
-        <ArticlesListAdmin articles={this.state.articles} />
-      </main>
+        </section>
+        <section>
+          <ArticlesListAdmin articles={this.state.articles} />
+        </section>
+      </div>
     )
   }
 }
